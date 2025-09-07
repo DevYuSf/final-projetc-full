@@ -1,6 +1,8 @@
 import axios from "axios"
 import {  useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 
 function AddProduct() {
@@ -15,9 +17,13 @@ function AddProduct() {
 
    const handleCreate = (e) => {
     e.preventDefault()
-    axios.post("http://localhost:5000/create/product", formData).then(() => {
-        alert("success register")
-        navigate("/product")
+    axios.post("http://localhost:5000/create/product", formData)
+    .then(() => {
+        toast.success("product add success 🚀")
+        setTimeout(() => {
+            navigate("/product")
+            
+        }, 2000);
     })
    }
     
@@ -89,6 +95,7 @@ function AddProduct() {
                     Upload Product
                 </button>
             </div>
+            <ToastContainer position="top-right" autoClose={2000} />
         </div>
     )
 }

@@ -1,6 +1,8 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function UpdateProduct() {
     const [name, setName] = useState("")
@@ -13,39 +15,44 @@ function UpdateProduct() {
     const navigate = useNavigate()
 
     const handleReadSingle = () => {
-        axios.get(`http://localhost:5000/readSingle/product/${params.id}`).then((res) => {
-            setName(res.data[0].name)
-            setQuantity(res.data[0].quantity)
-            setPrice(res.data[0].price)
-            setDescription(res.data[0].desc)
-            setImage(res.data[0].prImage)
-        })
+        axios.get(`http://localhost:5000/readSingle/product/${params.id}`)
+            .then((res) => {
+                setName(res.data[0].name)
+                setQuantity(res.data[0].quantity)
+                setPrice(res.data[0].price)
+                setDescription(res.data[0].desc)
+                setImage(res.data[0].prImage)
+            })
+            
     }
-    
-    const formData = new FormData()
-
-    formData.append("name", name)
-    formData.append("quantity", quantity)
-    formData.append("price", price)
-    formData.append("desc", description)
-    formData.append("img", img)
 
     // update
     const handleUpdate = () => {
-        axios.put(`http://localhost:5000/update/product/${params.id}`, formData).then(() => {
-            alert("success update")
-            navigate('/product')
-        })
+        const formData = new FormData()
+        formData.append("name", name)
+        formData.append("quantity", quantity)
+        formData.append("price", price)
+        formData.append("desc", description)
+        formData.append("img", img)
+
+        axios.put(`http://localhost:5000/update/product/${params.id}`, formData)
+            .then(() => {
+                toast.success("Product updated successfully! 🎉")
+                setTimeout(() => {
+                    navigate('/product')
+                }, 2000) // 2 seconds kadib ayuu u leexanayaa
+            })
+            
     }
 
     useEffect(() => {
         handleReadSingle()
-    },[])
+    }, [])
 
     return (
         <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-xl shadow-md space-y-4">
             <h2 className="text-2xl font-semibold text-gray-800">Update Product</h2>
-            
+
             <div>
                 <label className="block text-gray-700 font-medium mb-1">Product Name</label>
                 <input
@@ -96,10 +103,16 @@ function UpdateProduct() {
             </div>
 
             <div>
-                <button onClick={handleUpdate} className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                <button
+                    onClick={handleUpdate}
+                    className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+                >
                     Upload Product
                 </button>
             </div>
+
+            {/* Toast Container waa inuu ku jiraa JSX */}
+            <ToastContainer position="top-right" autoClose={2000} />
         </div>
     )
 }

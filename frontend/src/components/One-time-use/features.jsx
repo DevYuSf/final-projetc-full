@@ -49,7 +49,7 @@ function Features() {
                 </h2>
 
                 <div className="grid grid-cols-3 gap-8">
-                    {data.map((items, index) => (
+                    {data.slice(0,3).map((items, index) => (
                         <div
                             key={index}
                             className="bg-white shadow-lg rounded-xl p-5 flex flex-col items-center gap-4 hover:shadow-2xl transition"
