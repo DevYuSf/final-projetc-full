@@ -58,7 +58,7 @@ function Product() {
               <td className="py-3 px-4">{items.price}</td>
               <td className="py-3 px-4">{items.desc}</td>
               <td className="py-3 px-4">
-                <span className="text-green-600 font-semibold">{items.status}</span>
+                <span className={`${items.status === "Available" ? "text-green-600" : "text-red-500" } font-semibold`}>{items.status}</span>
               </td>
               <td className="py-3 px-4 flex gap-3">
                 <Link to={`/updateproduct/${items._id}`}><button className="text-green-500 mt-2 text-xl">

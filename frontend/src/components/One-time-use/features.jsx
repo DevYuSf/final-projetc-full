@@ -14,6 +14,17 @@ function Features() {
         handleReadData()
     }, [])
 
+    const handleLocalStorage = (data) => {
+        const newData = JSON.parse(localStorage.getItem("products"))  || []
+        const existId = newData.some(item => String(item._id) === String(data._id))
+        newData.push(data)
+        if(!existId){
+            localStorage.setItem("products", JSON.stringify(newData))
+        }
+    }
+
+    
+
     return (
         <div className="flex bg-gray-100 min-h-screen p-6 gap-8">
             {/* Sidebar Filter */}
@@ -49,7 +60,7 @@ function Features() {
                 </h2>
 
                 <div className="grid grid-cols-3 gap-8">
-                    {data.slice(0,3).map((items, index) => (
+                    {data.map((items, index) => (
                         <div
                             key={index}
                             className="bg-white shadow-lg rounded-xl p-5 flex flex-col items-center gap-4 hover:shadow-2xl transition"
@@ -78,7 +89,7 @@ function Features() {
                             {/* Price & Button */}
                             <div className="flex justify-between items-center w-full mt-2">
                                 <h4 className="text-lg font-bold text-blue-600">${items.price}</h4>
-                                <button className="px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-md hover:bg-blue-600 transition">
+                                <button onClick={() => handleLocalStorage(items)}  disabled={items.status !== "Available"} className={`${items.status === "Available" ? "px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-md hover:bg-blue-600 transition" : "px-4 py-2 bg-gray-500 text-black text-sm font-semibold rounded-md line-through"} `}>
                                     Add
                                 </button>
                             </div>
