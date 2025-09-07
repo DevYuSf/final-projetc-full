@@ -1,5 +1,7 @@
 import React from "react";
 import Features from "../components/One-time-use/features";
+import Cart from "./Carts";
+import Carts from "./Carts";
 
 function Home() {
     return (
@@ -38,6 +40,7 @@ function Home() {
             </div>
         </div>
         <Features/>
+        <Carts/>
 
         </div>
     );

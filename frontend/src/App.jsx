@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard"
 import Product from "./pages/Product"
 import UpdateProduct from "./components/One-time-use/updateProduct"
 import AddProduct from "./pages/AddProduct"
+import Cart from "./pages/Carts"
 
 // Layout leh Header (Home, Product)
 function MainLayout({ children }) {
@@ -28,6 +29,7 @@ function DashboardLayout({ children }) {
 
 function App() {
   return (
+    
     <Routes>
       {/* Pages leh Header */}
       <Route
