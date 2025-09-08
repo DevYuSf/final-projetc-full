@@ -17,8 +17,8 @@ function Features() {
     const handleLocalStorage = (data) => {
         const newData = JSON.parse(localStorage.getItem("products"))  || []
         const existId = newData.some(item => String(item._id) === String(data._id))
-        newData.push(data)
         if(!existId){
+            newData.push(data)
             localStorage.setItem("products", JSON.stringify(newData))
         }
     }

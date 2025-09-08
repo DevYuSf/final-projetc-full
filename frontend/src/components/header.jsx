@@ -26,9 +26,9 @@ function Header() {
                     <button className="px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 rounded-md">
                         Register Customers
                     </button>
-                    <button className="flex items-center gap-1 px-4 py-2 bg-[#847837] text-white rounded-md">
+                    <Link to="carts"><button className="flex items-center gap-1 px-4 py-2 bg-[#847837] text-white rounded-md">
                         <i className="fa-solid fa-cart-shopping"></i> Cart
-                    </button>
+                    </button></Link>
                 </div>
             </div>
         </header>

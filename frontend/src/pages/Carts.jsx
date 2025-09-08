@@ -1,4 +1,38 @@
+import { useEffect } from "react";
+import { useState } from "react";
+
 function Carts() {
+  const[productsData , setProducts] = useState([])
+  console.log(productsData)
+
+  useEffect(() => {
+    const getData = JSON.parse(localStorage.getItem("products")) || []
+    const update = getData.map(item => ({
+      ...item, quantity :1, maxQuantity: item.quantity
+    }))
+    setProducts(update)
+  },[])
+
+  const handleDelete = (id) => {
+    const removeItems = productsData.filter((item) => item._id !== id)
+    localStorage.setItem("products", JSON.stringify(removeItems))
+    setProducts(removeItems)
+  }
+
+  const TotalPrice = productsData.reduce((sum, item) => sum + (Number(item.price) * Number(item.quantity)),0)
+
+  // incremenet
+  const handleIncrement = (id) => {
+    setProducts(prd => prd.map(
+      item => item._id === id ? {...item, quantity: item.quantity < item.maxQuantity ?  item.quantity +1 : item.quantity} : item
+    ))
+  }
+  // Deccremenet
+  const handleDecrement = (id) => {
+    setProducts(prd => prd.map(
+      item => item._id === id ? {...item, quantity: item.quantity > 1 ? item.quantity -1 : item.quantity} : item
+    ))
+  }
   return (
     <div className="bg-gray-100 min-h-screen p-6">
       <div className="grid grid-cols-3 gap-6">
@@ -14,31 +48,35 @@ function Carts() {
                 <th>TOTAL</th>
               </tr>
             </thead>
-            <tbody>
+            {
+              productsData.map((items) => {
+                return <tbody>
               <tr className="border-b">
                 <td className="py-4 flex items-center gap-4">
                   <img
-                    src="https://inventstore.in/wp-content/uploads/2024/09/68-1.webp"
+                    src={`http://localhost:5000/allImages/${items.prImage}`}
                     alt="Iphone 16"
                     className="w-20 h-16 object-cover rounded"
                   />
                   <div>
-                    <h3 className="font-semibold">Iphone 16</h3>
+                    <h3 className="font-semibold">{items.name}</h3>
                     <p className="text-sm text-purple-600">Smart Phone</p>
-                    <button className="text-red-500 text-sm mt-1">Remove</button>
+                    <button onClick={() => handleDelete(items._id)} className="text-red-500 text-sm mt-1 cursor-pointer">Remove</button>
                   </div>
                 </td>
                 <td className="text-center">
                   <div className="flex items-center gap-2 justify-center">
-                    <button className="px-2 py-1 border rounded">-</button>
-                    <span>1</span>
-                    <button className="px-2 py-1 border rounded">+</button>
+                    <button onClick={() => handleDecrement(items._id)} className="px-2 py-1 border rounded">-</button>
+                    <span>{items.quantity}</span>
+                    <button onClick={() => handleIncrement(items._id)} className="px-2 py-1 border rounded">+</button>
                   </div>
                 </td>
-                <td className="text-gray-700">$1600</td>
-                <td className="font-semibold">$1600</td>
+                <td className="text-gray-700">${items.price}</td>
+                <td className="font-semibold">${items.price*items.quantity}</td>
               </tr>
             </tbody>
+              })
+            }
           </table>
         </div>
 
@@ -48,7 +86,7 @@ function Carts() {
 
           <div className="flex justify-between mb-4">
             <p className="text-gray-600">ITEMS</p>
-            <p className="font-medium">10</p>
+            <p className="font-medium">{productsData.length}</p>
           </div>
 
           <h4 className="mb-2 text-sm font-medium">Shipping</h4>
@@ -72,7 +110,7 @@ function Carts() {
 
           <div className="flex justify-between font-semibold mb-4">
             <h3>TOTAL COST</h3>
-            <h4>$1700</h4>
+            <h4>${TotalPrice}</h4>
           </div>
 
           <button className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg">

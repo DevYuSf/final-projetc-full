@@ -6,6 +6,7 @@ import Product from "./pages/Product"
 import UpdateProduct from "./components/One-time-use/updateProduct"
 import AddProduct from "./pages/AddProduct"
 import Cart from "./pages/Carts"
+import Carts from "./pages/Carts"
 
 // Layout leh Header (Home, Product)
 function MainLayout({ children }) {
@@ -75,6 +76,14 @@ function App() {
         element={
           <DashboardLayout>
             <AddProduct />
+          </DashboardLayout>
+        }
+      />
+      <Route
+        path="/carts"
+        element={
+          <DashboardLayout>
+            <Carts />
           </DashboardLayout>
         }
       />
