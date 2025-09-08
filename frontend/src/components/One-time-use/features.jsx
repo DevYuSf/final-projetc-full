@@ -89,7 +89,7 @@ function Features() {
                             {/* Price & Button */}
                             <div className="flex justify-between items-center w-full mt-2">
                                 <h4 className="text-lg font-bold text-blue-600">${items.price}</h4>
-                                <button onClick={() => handleLocalStorage(items)}  disabled={items.status !== "Available"} className={`${items.status === "Available" ? "px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-md hover:bg-blue-600 transition" : "px-4 py-2 bg-gray-500 text-black text-sm font-semibold rounded-md line-through"} `}>
+                                <button onClick={() => handleLocalStorage(items)} disabled={items.status !== "Available"}  className={`${items.status === "Available" ? "px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-md hover:bg-blue-600 transition" : "px-4 py-2 bg-gray-500 text-black text-sm font-semibold rounded-md line-through"} `}>
                                     Add
                                 </button>
                             </div>

@@ -3,7 +3,7 @@ import { useState } from "react";
 
 function Carts() {
   const[productsData , setProducts] = useState([])
-  console.log(productsData)
+  
 
   useEffect(() => {
     const getData = JSON.parse(localStorage.getItem("products")) || []
