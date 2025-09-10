@@ -84,25 +84,25 @@ function App() {
       <Route
         path="/carts"
         element={
-          <DashboardLayout>
+          <MainLayout>
             <Carts />
-          </DashboardLayout>
+          </MainLayout>
         }
       />
        <Route
         path="/register"
         element={
-          <DashboardLayout>
+          <MainLayout>
             <Register />
-          </DashboardLayout>
+          </MainLayout>
         }
       />
        <Route
         path="/login"
         element={
-          <DashboardLayout>
+          <MainLayout>
             <Login />
-          </DashboardLayout>
+          </MainLayout>
         }
       />
     </Routes>

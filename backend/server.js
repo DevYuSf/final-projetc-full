@@ -4,6 +4,7 @@ require("dotenv").config()
 const cors = require("cors")
 const productRouter = require("./Router/productRouter")
 const customerRouter = require("./Router/customerRoutes")
+const orderROuter = require("./Router/orderRouter")
 
 
 const app = express()
@@ -14,6 +15,7 @@ app.use(cors())
 
 app.use(productRouter)
 app.use(customerRouter)
+app.use(orderROuter)
 
 mongoose.connect(process.env.db_url)
     .then(() => console.log("MongoDB connected"))

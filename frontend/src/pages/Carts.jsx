@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 
@@ -12,6 +13,40 @@ function Carts() {
     }))
     setProducts(update)
   },[])
+
+  const getCustomer = localStorage.getItem("customer")
+
+  let customerOrder = ""
+
+  if(getCustomer){
+    customerOrder = JSON.parse(getCustomer).data.customer.name
+  }
+
+  console.log(customerOrder)
+
+  
+
+  const handleOrder = () => {
+    if(!customerOrder){
+      alert("please login customer or enter customer name")
+    }
+    axios.post("http://localhost:5000/create/order", {
+      "customer": customerOrder,
+      "products": productsData.map((item) => ({
+        "productId": item._id,
+        "quantity": item.quantity
+      }))
+    }).then((res) => {
+      if(res.data.error){
+        alert(res.data.error)
+      }
+      else{
+        alert("success order")
+        localStorage.removeItem("products")
+        setProducts([])
+      }
+    }).catch(error => console.log(error))
+  }
 
   const handleDelete = (id) => {
     const removeItems = productsData.filter((item) => item._id !== id)
@@ -113,7 +148,7 @@ function Carts() {
             <h4>${TotalPrice}</h4>
           </div>
 
-          <button className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg">
+          <button onClick={handleOrder} className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg">
             Checkout
           </button>
         </div>
