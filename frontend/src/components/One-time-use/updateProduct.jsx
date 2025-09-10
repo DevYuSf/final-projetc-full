@@ -9,6 +9,7 @@ function UpdateProduct() {
     const [quantity, setQuantity] = useState("")
     const [price, setPrice] = useState("")
     const [description, setDescription] = useState("")
+    const [category, setCategory] = useState("")
     const [img, setImage] = useState(null)
 
     const params = useParams()
@@ -22,6 +23,7 @@ function UpdateProduct() {
                 setPrice(res.data[0].price)
                 setDescription(res.data[0].desc)
                 setImage(res.data[0].prImage)
+                setCategory(res.data[0].category)
             })
             
     }
@@ -34,6 +36,7 @@ function UpdateProduct() {
         formData.append("price", price)
         formData.append("desc", description)
         formData.append("img", img)
+        formData.append("category", category)
 
         axios.put(`http://localhost:5000/update/product/${params.id}`, formData)
             .then(() => {
@@ -82,6 +85,13 @@ function UpdateProduct() {
                     className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
             </div>
+            <label className="block text-gray-700 font-medium mb-1">Category</label>
+            <input
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    type="text"
+                    className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
 
             <div>
                 <label className="block text-gray-700 font-medium mb-1">Description</label>

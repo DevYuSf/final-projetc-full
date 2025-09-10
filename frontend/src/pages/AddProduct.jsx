@@ -10,6 +10,7 @@ function AddProduct() {
     const [quantity, setQuantity] = useState("")
     const [price, setPrice] = useState("")
     const [description, setDescription] = useState("")
+    const [category, setCategory] = useState("")
     const [img, setImage] = useState(null)
 
     
@@ -33,6 +34,7 @@ function AddProduct() {
     formData.append("quantity", quantity)
     formData.append("price", price)
     formData.append("desc", description)
+    formData.append("category", category)
     formData.append("img", img)
 
     
@@ -70,6 +72,15 @@ function AddProduct() {
                     className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
             </div>
+             <div>
+                <label className="block text-gray-700 font-medium mb-1">Category</label>
+                <input
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    type="text"
+                    className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+            </div>
 
             <div>
                 <label className="block text-gray-700 font-medium mb-1">Description</label>
@@ -92,7 +103,7 @@ function AddProduct() {
 
             <div>
                 <button onClick={handleCreate} className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
-                    Upload Product
+                    Add Product
                 </button>
             </div>
             <ToastContainer position="top-right" autoClose={2000} />

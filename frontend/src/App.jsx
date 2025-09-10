@@ -7,6 +7,8 @@ import UpdateProduct from "./components/One-time-use/updateProduct"
 import AddProduct from "./pages/AddProduct"
 import Cart from "./pages/Carts"
 import Carts from "./pages/Carts"
+import Register from "./pages/Regsiter"
+import Login from "./pages/Login"
 
 // Layout leh Header (Home, Product)
 function MainLayout({ children }) {
@@ -84,6 +86,22 @@ function App() {
         element={
           <DashboardLayout>
             <Carts />
+          </DashboardLayout>
+        }
+      />
+       <Route
+        path="/register"
+        element={
+          <DashboardLayout>
+            <Register />
+          </DashboardLayout>
+        }
+      />
+       <Route
+        path="/login"
+        element={
+          <DashboardLayout>
+            <Login />
           </DashboardLayout>
         }
       />

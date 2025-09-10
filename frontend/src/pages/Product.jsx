@@ -37,6 +37,7 @@ function Product() {
               <th className="py-3 px-4 text-left text-gray-600 font-semibold">Quantity</th>
               <th className="py-3 px-4 text-left text-gray-600 font-semibold">Price</th>
               <th className="py-3 px-4 text-left text-gray-600 font-semibold">Description</th>
+               <th className="py-3 px-4 text-left text-gray-600 font-semibold">Category</th>
               <th className="py-3 px-4 text-left text-gray-600 font-semibold">Status</th>
               <th className="py-3 px-4 text-left text-gray-600 font-semibold">Action</th>
             </tr>
@@ -57,6 +58,7 @@ function Product() {
               <td className="py-3 px-4">{items. quantity}</td>
               <td className="py-3 px-4">{items.price}</td>
               <td className="py-3 px-4">{items.desc}</td>
+              <td className="py-3 px-4">{items.category}</td>
               <td className="py-3 px-4">
                 <span className={`${items.status === "Available" ? "text-green-600" : "text-red-500" } font-semibold`}>{items.status}</span>
               </td>

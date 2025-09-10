@@ -2,13 +2,14 @@ const productModel = require("../model/productModel")
 
 const createProduct = async (req, res) => {
     try {
-        const { name, price, desc, quantity } = req.body
+        const { name, price, desc, quantity,category } = req.body
         const newData = productModel({
             name: name,
             price: price,
             desc:desc,
             quantity:quantity,
-            prImage: req.file.filename
+            prImage: req.file.filename,
+            category:category
         })
         await newData.save()
         res.send(newData)
@@ -21,7 +22,14 @@ const createProduct = async (req, res) => {
 //read
 const readProduct = async(req,res) => {
     try{
-        const readData = await productModel.find()
+        const {category} = req.body || {}
+
+        let filterData = {}
+
+        if(category){
+            filterData = {category}
+        }
+        const readData = await productModel.find(filterData)
         if(readData){
             res.send(readData)
         }
@@ -48,7 +56,7 @@ const readSingleProduct = async(req,res) => {
 
 const updateProduct = async(req,res) => {
     try{
-        const { name, price, desc, quantity } = req.body
+        const { name, price, desc, quantity,category } = req.body
         const updateData = await productModel.updateOne(
             {_id: req.params.id},
             {$set: {
@@ -56,7 +64,8 @@ const updateProduct = async(req,res) => {
                 price: price,
                 desc: desc,
                 quantity: quantity,
-                prImage: req.file ? req.file.filename : undefined
+                prImage: req.file ? req.file.filename : undefined,
+                category:category
 
             }}
         )

@@ -3,6 +3,8 @@ const mongoose = require("mongoose")
 require("dotenv").config()
 const cors = require("cors")
 const productRouter = require("./Router/productRouter")
+const customerRouter = require("./Router/customerRoutes")
+
 
 const app = express()
 const PORT = process.env.port || 5000
@@ -11,6 +13,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use(productRouter)
+app.use(customerRouter)
 
 mongoose.connect(process.env.db_url)
     .then(() => console.log("MongoDB connected"))

@@ -4,15 +4,19 @@ import { useEffect, useState } from "react"
 function Features() {
     const [data, setData] = useState([])
 
+    const[category, setCategory] = useState("")
+
     const handleReadData = () => {
-        axios.get("http://localhost:5000/read/product").then((res) => {
+        axios.post("http://localhost:5000/read/product", {
+            "category": category
+        }).then((res) => {
             setData(res.data)
         })
     }
 
     useEffect(() => {
         handleReadData()
-    }, [])
+    }, [category])
 
     const handleLocalStorage = (data) => {
         const newData = JSON.parse(localStorage.getItem("products"))  || []
@@ -32,22 +36,22 @@ function Features() {
                 <h3 className="text-lg font-semibold text-gray-700 mb-4">Categories</h3>
                 <div className="flex flex-col gap-3">
                     <label className="flex items-center gap-2">
-                        <input name="category" type="radio" className="w-4 h-4 text-blue-600" />
+                        <input value="Smart-Phone" onChange={() => setCategory("Smart-Phone")} name="category" type="radio" className="w-4 h-4 text-blue-600" />
                         <span>Smart-Phone</span>
                     </label>
 
                     <label className="flex items-center gap-2">
-                        <input name="category" type="radio" className="w-4 h-4 text-blue-600" />
+                        <input value="Tv" onChange={() => setCategory("Tv")}  name="category" type="radio" className="w-4 h-4 text-blue-600" />
                         <span>Tv</span>
                     </label>
 
                     <label className="flex items-center gap-2">
-                        <input name="category" type="radio" className="w-4 h-4 text-blue-600" />
+                        <input value="Laptop" onChange={() => setCategory("Laptop")}  name="category" type="radio" className="w-4 h-4 text-blue-600" />
                         <span>Laptop</span>
                     </label>
 
                     <label className="flex items-center gap-2">
-                        <input name="category" type="radio" className="w-4 h-4 text-blue-600" />
+                        <input value="Desk-Top" onChange={() => setCategory("Desk-Top")}  name="category" type="radio" className="w-4 h-4 text-blue-600" />
                         <span>Desk-Top</span>
                     </label>
                 </div>
