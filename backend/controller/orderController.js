@@ -59,4 +59,55 @@ const createOrder = async (req, res) => {
 
 }
 
-module.exports = { createOrder }
+// read order
+
+const readOrder = async (req, res) => {
+    const getOrder = await orderModel.find().populate("products.productId", "name price")
+    if(getOrder){
+        res.send(getOrder)
+    }
+}
+
+//get total income
+
+const getTotalIncome = async (req, res) => {
+    const totalIncome = await orderModel.aggregate([
+        {
+            $group: {
+                _id: null,
+                totalIncome: { $sum: "$TotalAmount" }
+            }
+        }
+    ])
+    if(totalIncome){
+        res.send(totalIncome)
+    }
+}
+
+const getTopCustomers = async (req, res) => {
+    const topCustomers = await orderModel.aggregate([
+        {
+            $group:{
+                _id: "$customer",
+                totalSpent: { $sum: "$TotalAmount" },
+                totalOrders: { $sum: 1 }
+            }
+        },
+        { $sort: { totalSpent: -1 } },
+        { $limit: 5 }
+    ])
+    if(topCustomers.length === 0){
+        return res.status(400).json({ message: "No customers found" })
+    }
+    res.json(topCustomers.map(item => ({
+        customer: item._id,
+        totalSpent: item.totalSpent,
+        totalOrders: item.totalOrders
+
+    }))
+)
+}
+
+
+
+module.exports = { createOrder, readOrder,getTotalIncome,getTopCustomers }

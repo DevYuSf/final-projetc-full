@@ -9,6 +9,7 @@ import Cart from "./pages/Carts"
 import Carts from "./pages/Carts"
 import Register from "./pages/Regsiter"
 import Login from "./pages/Login"
+import Slidebar from "./pages/Slidebar"
 
 // Layout leh Header (Home, Product)
 function MainLayout({ children }) {
@@ -46,11 +47,11 @@ function App() {
 
       {/* Dashboard iyo Product gudaha Dashboard */}
       <Route
-        path="/dashboard/*"
+        path="/dashboard"
         element={
           <DashboardLayout>
             {/* Default dashboard page */}
-            <h1 className="text-3xl font-bold text-gray-800">Welcome to Dashboard</h1>
+          <Slidebar/>
           </DashboardLayout>
         }
       />
@@ -105,6 +106,7 @@ function App() {
           </MainLayout>
         }
       />
+       
     </Routes>
   )
 }
