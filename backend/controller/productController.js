@@ -19,6 +19,7 @@ const createProduct = async (req, res) => {
 
 }
 
+
 //read
 const readProduct = async(req,res) => {
     try{

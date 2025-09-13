@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
 function Dashboard() {
+  const handleLogOut = () => {
+    localStorage.removeItem("admin");
+  }
   return (
     <div className="w-64 bg-gray-100 min-h-screen p-6 shadow-md">
    <h2 className="text-2xl font-bold mb-6 text-gray-800">Dashboard</h2>
@@ -12,7 +15,8 @@ function Dashboard() {
         <li className="p-2 rounded-md hover:bg-gray-200 cursor-pointer transition">Order</li>
         <li className="p-2 rounded-md hover:bg-gray-200 cursor-pointer transition">Add Order</li>
         <li className="p-2 rounded-md hover:bg-gray-200 cursor-pointer transition">Reports</li>
-        <li className="p-2 rounded-md hover:bg-gray-200 cursor-pointer transition">Setting</li>
+        <li  className="p-2 rounded-md hover:bg-gray-200 cursor-pointer transition">Setting</li>
+        <Link to="/login"><li onClick={handleLogOut} className="p-2 rounded-md hover:bg-gray-200 cursor-pointer transition">Logout</li></Link>
       </ul>
     </div>
   );

@@ -1,11 +1,13 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
     const getCustomer = localStorage.getItem("customer")
+
+    const navigate = useNavigate()
    
     const handleLogOut = () => {
         localStorage.clear()
+        navigate("/")
     }
 
     
@@ -31,6 +33,7 @@ function Header() {
                         (
                             <>
                             <div> 
+                                {/* <h1 className=" text-2xl font-bold bg-yellow-500 w-10 h-10 rounded-full text-black text-center items-center">{JSON.parse(getCustomer)?.data?.customer?.name?.[0] || "?" }</h1> */}
                                 <h1 className=" text-2xl font-bold bg-yellow-500 w-10 h-10 rounded-full text-black text-center items-center">{JSON.parse(getCustomer).data?.customer.name[0]}</h1>
                             </div>
                             <button onClick={handleLogOut} className="px-2 py-2 border-2 border-blue-500 text-black  rounded-md ">

@@ -21,7 +21,7 @@ function Login() {
             
             toast.success(`${active}Login succesfully`)
             setTimeout(() => navigate(active === "customer" ? "/" : "/dashboard"), 1500)
-            localStorage.setItem("customer", JSON.stringify(res) )
+            localStorage.setItem(active === "customer" ? "customer": "admin", JSON.stringify(res) )
         }).catch((error) => {
           if(error){
             toast.error("this is email already exits")

@@ -5,11 +5,11 @@ import Dashboard from "./pages/Dashboard"
 import Product from "./pages/Product"
 import UpdateProduct from "./components/One-time-use/updateProduct"
 import AddProduct from "./pages/AddProduct"
-import Cart from "./pages/Carts"
 import Carts from "./pages/Carts"
-import Register from "./pages/Regsiter"
+import Register from "./pages/Register"
 import Login from "./pages/Login"
 import Slidebar from "./pages/Slidebar"
+import ProtectedRouter from "./pages/ProtectedRouter"
 
 // Layout leh Header (Home, Product)
 function MainLayout({ children }) {
@@ -49,19 +49,23 @@ function App() {
       <Route
         path="/dashboard"
         element={
+          <ProtectedRouter>
           <DashboardLayout>
             {/* Default dashboard page */}
           <Slidebar/>
           </DashboardLayout>
+          </ProtectedRouter>
         }
       />
 
       <Route
         path="/product"
         element={
+          <ProtectedRouter>
           <DashboardLayout>
             <Product />
           </DashboardLayout>
+          </ProtectedRouter>
         }
       />
     
@@ -69,9 +73,11 @@ function App() {
       <Route
         path="/updateproduct/:id"
         element={
+          <ProtectedRouter>
           <DashboardLayout>
             <UpdateProduct />
           </DashboardLayout>
+          </ProtectedRouter>
         }
       />
       <Route
