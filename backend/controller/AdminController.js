@@ -1,5 +1,6 @@
 const adminModel = require("../model/AdminModel")
 const bcyrpt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
 
 const createAdmin = async (req, res) => {
     try {
@@ -46,13 +47,19 @@ const adminLogin = async (req,res) => {
              return res.status(400).json({ error: "invalid password" })
 
         }
+
+        //token
+        const token = jwt.sign({id: existEmail._id, name: existEmail.name, email: existEmail.email, role:existEmail.role}, process.env.JWT_Secret, {expiresIn: "1h"})
         
         res.send({
             message: "succes login",
-            customer: {
+            admin: {
                 name: existEmail.name,
-                email: existEmail.email
-            }
+                email: existEmail.email,
+                role: existEmail.role
+            },
+            token
+
         })
 
     }catch(error){

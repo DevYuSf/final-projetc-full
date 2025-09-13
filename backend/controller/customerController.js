@@ -62,4 +62,12 @@ const customerLogin = async (req,res) => {
     }
 }
 
-module.exports = { createCustomer, customerLogin }
+const readCustomer = async (req,res) => {
+    
+        const getCustomer = await customerModel.find()
+        if(getCustomer){
+            res.send(getCustomer)
+        }
+}
+
+module.exports = { createCustomer, customerLogin,readCustomer }
