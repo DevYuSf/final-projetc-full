@@ -24,6 +24,7 @@ function Login() {
             localStorage.setItem(active === "customer" ? "customer": "admin", JSON.stringify(res) )
         }).catch((error) => {
           if(error){
+            console.log(error)
             toast.error("this is email already exits")
           }
         })

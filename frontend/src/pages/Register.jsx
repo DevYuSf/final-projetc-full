@@ -17,10 +17,10 @@ function Register() {
 
     function handleInsert(e) {
         e.preventDefault()
-        const url = active === "customer" ? "http://localhost:5000/create/customer" : "http://localhost:5000/create/admin"
-        const payload = active === "customer" ? {name: customerName, phone: phone, email: email, password: password} : {name: customerName, email: email, password: password}
+        const url =  "http://localhost:5000/create/customer" 
+        const payload =  {name: customerName, phone: phone, email: email, password: password} 
         axios.post(url,payload).then((res) => {
-          toast.success(`${active} Login succesfully`)
+          toast.success(`${active} registration succesfully`)
             setTimeout(() => navigate("/login"), 1500)
         }).catch((error) => {
           if(error){
@@ -34,16 +34,13 @@ function Register() {
   return (
     <div className="min-h-screen grid place-items-center bg-gray-50">
       <div className="w-full max-w-md bg-white rounded-2xl shadow p-6">
-        <div className="flex justify-center gap-8">
-          <button onClick={()=> setActive("customer")} className= {` px-12 py-3 rounded-2xl ${active === "customer" ? "bg-blue-500 text-white" : "border-2 border-black text-black"}`}>Customer</button>
-          <button onClick={()=> setActive("admin")} className= {` px-12 py-3 rounded-2xl ${active === "admin" ? "bg-blue-500 text-white" : "border-2 border-black text-black"}`}>Admin</button>
-        </div>
+        
         <h2 className="text-2xl font-semibold tracking-tight mb-1">Register</h2>
 
         <form className="space-y-4">
           <div>
             <label className="block text-sm font-medium mb-1" htmlFor="name">
-             {active === "customer" ? "Customer Name" : "Admin Name"}
+             Customer Name 
             </label>
             <input value={customerName} onChange={(e) => setCustomer(e.target.value)}
               id="name"
@@ -97,7 +94,7 @@ function Register() {
             type="submit"
             className="w-full rounded-xl bg-gray-900 px-4 py-2 text-white font-medium hover:bg-black"
           >
-           {active === "customer" ? "Register Customer" : "Register Admin"}
+           Register Customer
           </button>
         </form>
 
